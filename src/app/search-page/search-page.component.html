@@ -1,0 +1,77 @@
+<div class="m-5">
+  <h2>Search Employee</h2>
+  <div class="p-5 mt-2 rounded shadow" style="background-color:beige">
+    <form class="d-flex flex-column justify-content-center align-items-center"
+     [formGroup]="searchForm" (ngSubmit)="search()">
+      <!-- <form class="d-flex justify-content-center align-items-center" [formGroup]="userSearch"
+        (ngSubmit)="SearchData()"> -->
+      <div class="m-3">
+        <label class="mx-3 fs-4"
+          >Id
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Id"
+            formControlName="searchId"
+        /></label>
+        <label class="mx-3 fs-4"
+          >Name
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Name"
+            formControlName="searchName"
+        /></label>
+        <label class="mx-3 fs-4"
+          >Surname
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Surname"
+            formControlName="searchSurname"
+        /></label>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary m-2">Search</button>
+        <button class="btn btn-secondary m-2" (click)="resetForm()">Clear</button>
+        <button class="btn btn-warning m-2" (click)="goToCreate()">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="m-5" *ngIf="isData">
+  <h2 class="pb-3">Employee List</h2>
+  <table class="table table-striped shadow">
+    <thead>
+      <tr style="background-color:rgb(95, 245, 232);">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Telephone number</th>
+        <th>Email</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <a class="btn btn-info" (click)="goToUpdate(employee.id)"><td>{{ employee.id }}</td></a>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.surname }}</td>
+        <td>{{ employee.telephone }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <button
+            (click)="deleteEmployee(employee.id)"
+            class="btn btn-danger"
+            style="margin-left: 10px"
+          ><img src="../../assets/trash.svg" width="20">
+          </button>
+          <!-- <button (click)="employeeDetails(employee.id)" class="btn btn-success" style="margin-left: 10px">View</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h1 class="text-center" *ngIf="isData==false">EMPLOYEE NOT FOUND 😥</h1>
